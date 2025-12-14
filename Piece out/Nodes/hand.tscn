@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://cygpjmg3lsw62"]
+
+[ext_resource type="Script" path="res://Nodes/hand.gd" id="1_8n5rq"]
+[ext_resource type="Texture2D" uid="uid://5fd0qywn0tjm" path="res://Assets/Cursors/cursor_mini-sheet0.png" id="1_g0ggf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhq37"]
+atlas = ExtResource("1_g0ggf")
+region = Rect2(66, 68, 65, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pey3b"]
+atlas = ExtResource("1_g0ggf")
+region = Rect2(131, 68, 65, 65)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fwgbx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bhq37")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pey3b")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5qqrg"]
+size = Vector2(57, 57)
+
+[node name="Hand" type="Node2D"]
+script = ExtResource("1_8n5rq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_fwgbx")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, 1.5)
+shape = SubResource("RectangleShape2D_5qqrg")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

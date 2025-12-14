@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cm1byen56yid"]
+
+[ext_resource type="PackedScene" uid="uid://d3seybhuungmw" path="res://Nodes/Edited original code/team.tscn" id="1_cwddm"]
+[ext_resource type="Script" path="res://Nodes/Edited original code/golf.gd" id="2_ktsjn"]
+[ext_resource type="Texture2D" uid="uid://wq5dredynqhm" path="res://Assets/scorecard 2.png" id="3_6ge43"]
+
+[node name="Team" groups=["char"] instance=ExtResource("1_cwddm")]
+visible = true
+script = ExtResource("2_ktsjn")
+
+[node name="Sprite2D" parent="." index="0"]
+visible = true
+texture = ExtResource("3_6ge43")
+
+[node name="Character image" parent="Sprite2D" index="0"]
+visible = true
+
+[node name="Label" parent="." index="1"]
+visible = true

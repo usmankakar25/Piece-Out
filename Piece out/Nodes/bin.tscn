@@ -1,0 +1,117 @@
+[gd_scene load_steps=13 format=3 uid="uid://c2qq48q3kyar6"]
+
+[ext_resource type="Script" path="res://bin.gd" id="1_lmfk4"]
+[ext_resource type="Texture2D" uid="uid://ba6cv2ylcq1ck" path="res://DS DSi - Mario Party DS - Piece Out2.png" id="2_88vdv"]
+[ext_resource type="AudioStream" uid="uid://cahp8qklqou85" path="res://Assets/Music and sound effects/fall.ogg" id="3_o5cr7"]
+[ext_resource type="Texture2D" uid="uid://csclftr5fmaht" path="res://Assets/Bin/Bin thing.png" id="4_s3yqr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dn0sm"]
+atlas = ExtResource("2_88vdv")
+region = Rect2(126, 288, 80, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5ogx"]
+atlas = ExtResource("2_88vdv")
+region = Rect2(126, 307, 80, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eusan"]
+atlas = ExtResource("2_88vdv")
+region = Rect2(126, 326, 80, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_va6b0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dn0sm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u5ogx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eusan")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="Animation" id="Animation_ufx8w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_21bwr"]
+resource_name = "trash"
+length = 1.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 2, 1, 0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_settofalse"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bsa3n"]
+_data = {
+"RESET": SubResource("Animation_ufx8w"),
+"trash": SubResource("Animation_21bwr")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hyc8b"]
+size = Vector2(72, 8)
+
+[node name="Bin" type="Area2D"]
+collision_layer = 128
+collision_mask = 16
+script = ExtResource("1_lmfk4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_va6b0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bsa3n")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, 4)
+shape = SubResource("RectangleShape2D_hyc8b")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_o5cr7")
+
+[node name="BinThing" type="Sprite2D" parent="."]
+position = Vector2(0, 7.15256e-07)
+scale = Vector2(0.447761, 0.423077)
+texture = ExtResource("4_s3yqr")

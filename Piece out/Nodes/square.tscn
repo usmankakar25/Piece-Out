@@ -1,0 +1,54 @@
+[gd_scene load_steps=10 format=3 uid="uid://cof4p3ofhs6ve"]
+
+[ext_resource type="PackedScene" uid="uid://bnxcs1hggxryj" path="res://Nodes/block_parent.tscn" id="1_cc4er"]
+[ext_resource type="Script" path="res://Nodes/square.gd" id="2_d18gi"]
+[ext_resource type="Texture2D" uid="uid://hxb2dw4jasps" path="res://Assets/Blocksprites/Blue/Square.png" id="3_i0f6u"]
+[ext_resource type="Texture2D" uid="uid://biitrhuax7gwr" path="res://Assets/Blocksprites/Green/Square.png" id="4_jnn6a"]
+[ext_resource type="Texture2D" uid="uid://bpq0q26a4e3w4" path="res://Assets/Blocksprites/Orange/Square.png" id="5_bfylb"]
+[ext_resource type="Texture2D" uid="uid://bpa304mkc6bo0" path="res://Assets/Blocksprites/Yellow/Square.png" id="6_1dky4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uysck"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_i0f6u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_jnn6a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_bfylb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_1dky4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8qv26"]
+size = Vector2(510.998, 511.002)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e52id"]
+size = Vector2(483.998, 481.002)
+
+[node name="BlockParent" instance=ExtResource("1_cc4er")]
+visible = true
+script = ExtResource("2_d18gi")
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_uysck")
+animation = &"default"
+
+[node name="Grab Range" parent="." index="1"]
+visible = true
+position = Vector2(-1.50002, -0.499995)
+shape = SubResource("RectangleShape2D_8qv26")
+
+[node name="Area2D" parent="." index="2"]
+visible = true
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+visible = true
+shape = SubResource("RectangleShape2D_e52id")

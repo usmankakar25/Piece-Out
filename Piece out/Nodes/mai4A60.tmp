@@ -1,0 +1,282 @@
+[gd_scene load_steps=27 format=3 uid="uid://b8f1wjdj7pj74"]
+
+[ext_resource type="Script" path="res://Nodes/Tester.gd" id="1_3aebp"]
+[ext_resource type="PackedScene" uid="uid://ysuf8sw6to86" path="res://Nodes/player_1_tileset.tscn" id="1_sl27y"]
+[ext_resource type="PackedScene" uid="uid://cs1djkrd5tr51" path="res://Nodes/player_2_tileset.tscn" id="2_53jx2"]
+[ext_resource type="PackedScene" uid="uid://caw38iq7jftkx" path="res://Nodes/thebar.tscn" id="3_3b7uy"]
+[ext_resource type="PackedScene" uid="uid://d26c2dnrlat3p" path="res://Nodes/timer.tscn" id="4_gxmj2"]
+[ext_resource type="PackedScene" uid="uid://ckdhknh7sbnda" path="res://Nodes/Player1.tscn" id="4_hhw6y"]
+[ext_resource type="PackedScene" uid="uid://bfspnq1etlnme" path="res://Nodes/Player2.tscn" id="5_wdljb"]
+[ext_resource type="PackedScene" uid="uid://drr8jknps62c7" path="res://Nodes/Edited original code/Knight.tscn" id="6_osuxw"]
+[ext_resource type="PackedScene" uid="uid://dtltv7y0jfh6l" path="res://Nodes/bin2.tscn" id="7_4dmy0"]
+[ext_resource type="PackedScene" uid="uid://cm1byen56yid" path="res://Nodes/Edited original code/Golf.tscn" id="7_511k5"]
+[ext_resource type="PackedScene" uid="uid://ekcdyql4ayky" path="res://Nodes/bin1.tscn" id="8_1dbul"]
+[ext_resource type="AudioStream" uid="uid://ck011ynwamvyi" path="res://Assets/Music and sound effects/72. Duel Win.mp3" id="11_3cvjc"]
+[ext_resource type="Theme" uid="uid://dii2pd767yhug" path="res://Nodes/Theme.tres" id="11_iev5m"]
+[ext_resource type="AudioStream" uid="uid://g4yeon5o1kn" path="res://Assets/Music and sound effects/whistle.ogg" id="12_1nnod"]
+[ext_resource type="AudioStream" uid="uid://i7l5pc62fms6" path="res://Assets/Music and sound effects/Serious competition.mp3" id="12_fcosb"]
+[ext_resource type="AudioStream" uid="uid://4hjpciu8kxrl" path="res://Assets/Music and sound effects/startwhistle.ogg" id="13_rxexe"]
+[ext_resource type="PackedScene" uid="uid://bftcfu8ebkn0m" path="res://Nodes/Edited original code/transition.tscn" id="14_nsoyy"]
+
+[sub_resource type="Animation" id="Animation_i8w3o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Music:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-10.0]
+}
+
+[sub_resource type="Animation" id="Animation_3om1o"]
+resource_name = "close"
+length = 0.8
+step = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_finishgame"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_7eits"]
+resource_name = "end game"
+length = 1.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Music:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-5.0, -80.0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"_displayfinishedText"
+}, {
+"args": [],
+"method": &"_removetext"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_j1noa"]
+resource_name = "start game"
+length = 2.2
+step = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1.2, 2.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"displayStart"
+}, {
+"args": [],
+"method": &"startGame"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ib82v"]
+_data = {
+"RESET": SubResource("Animation_i8w3o"),
+"close": SubResource("Animation_3om1o"),
+"end game": SubResource("Animation_7eits"),
+"start game": SubResource("Animation_j1noa")
+}
+
+[sub_resource type="Animation" id="Animation_xxoa7"]
+resource_name = "addplayer1points"
+length = 1.6
+step = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.7, 1, 1.3, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"addP1orangepoints"
+}, {
+"args": [],
+"method": &"addP1bluepoints"
+}, {
+"args": [],
+"method": &"addP1yellowpoints"
+}, {
+"args": [],
+"method": &"addP1greenpoints"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8ltba"]
+_data = {
+"addplayer1points": SubResource("Animation_xxoa7")
+}
+
+[sub_resource type="Animation" id="Animation_3rva4"]
+resource_name = "addplayer2points"
+length = 1.6
+step = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.7, 1, 1.3, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"addP2orangepoints"
+}, {
+"args": [],
+"method": &"addP2bluepoints"
+}, {
+"args": [],
+"method": &"addP2yellowpoints"
+}, {
+"args": [],
+"method": &"addP2greenpoints"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8euv0"]
+_data = {
+"addplayer2points": SubResource("Animation_3rva4")
+}
+
+[node name="Main game" type="Node2D"]
+script = ExtResource("1_3aebp")
+
+[node name="Tilesets" type="Node2D" parent="."]
+
+[node name="Player1Tileset" parent="Tilesets" instance=ExtResource("1_sl27y")]
+
+[node name="Player2Tileset" parent="Tilesets" instance=ExtResource("2_53jx2")]
+
+[node name="Thebar" parent="." instance=ExtResource("3_3b7uy")]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="Blocks" type="Node2D" parent="."]
+
+[node name="Hands" type="Node2D" parent="."]
+
+[node name="Area2D" parent="Hands" instance=ExtResource("4_hhw6y")]
+z_index = 0
+z_as_relative = true
+
+[node name="Area2D2" parent="Hands" instance=ExtResource("5_wdljb")]
+z_index = 0
+z_as_relative = true
+
+[node name="Labels" type="Node2D" parent="."]
+
+[node name="Bin2" parent="." instance=ExtResource("7_4dmy0")]
+
+[node name="Bin" parent="." instance=ExtResource("8_1dbul")]
+
+[node name="Players" type="Node2D" parent="."]
+
+[node name="Team" parent="Players" instance=ExtResource("6_osuxw")]
+
+[node name="Team2" parent="Players" instance=ExtResource("7_511k5")]
+
+[node name="Time" parent="." instance=ExtResource("4_gxmj2")]
+
+[node name="Finish" type="Node2D" parent="."]
+z_index = 30
+position = Vector2(532, 290)
+
+[node name="Label" type="Label" parent="Finish"]
+offset_left = -86.0
+offset_top = -51.0
+offset_right = 103.0
+offset_bottom = 50.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource("11_iev5m")
+theme_override_colors/font_color = Color(1, 0.815686, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.211765, 0.0627451, 0.447059, 1)
+text = "Golf
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_fcosb")
+volume_db = -10.0
+parameters/looping = true
+
+[node name="Win" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_3cvjc")
+
+[node name="Whistle" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_1nnod")
+
+[node name="Start" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_rxexe")
+
+[node name="Transition" parent="." instance=ExtResource("14_nsoyy")]
+
+[node name="Main" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ib82v")
+}
+
+[node name="Player1" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8ltba")
+}
+
+[node name="Player2" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8euv0")
+}
+
+[connection signal="full" from="Tilesets/Player1Tileset" to="." method="_on_player_1_tileset_full"]
+[connection signal="full" from="Tilesets/Player2Tileset" to="." method="_on_player_2_tileset_full"]
+[connection signal="landed" from="Hands/Area2D" to="." method="_on_area_2d_landed"]
+[connection signal="landed" from="Hands/Area2D2" to="." method="_on_area_2d_2_landed"]
+[connection signal="finish" from="Time" to="." method="_on_time_finish"]

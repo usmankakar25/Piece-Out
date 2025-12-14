@@ -1,0 +1,75 @@
+[gd_scene load_steps=14 format=3 uid="uid://bk8fh28kasb0u"]
+
+[ext_resource type="PackedScene" uid="uid://bnxcs1hggxryj" path="res://Nodes/block_parent.tscn" id="1_si717"]
+[ext_resource type="Script" path="res://Nodes/six.gd" id="2_aa0xj"]
+[ext_resource type="Texture2D" uid="uid://b4c0vn6nxibga" path="res://Assets/Blocksprites/Blue/2x3.png" id="3_qk34g"]
+[ext_resource type="Texture2D" uid="uid://xoqxr0gumkhm" path="res://Assets/Blocksprites/Green/2x3.png" id="4_bclpw"]
+[ext_resource type="Texture2D" uid="uid://dva2estimuij6" path="res://Assets/Blocksprites/Orange/2x3.png" id="5_d7upi"]
+[ext_resource type="Texture2D" uid="uid://bn11d80myboak" path="res://Assets/Blocksprites/Yellow/3x2.png" id="6_0d73c"]
+[ext_resource type="Texture2D" uid="uid://dal7pleg6tin7" path="res://Assets/Blocksprites/Blue/3x2.png" id="7_xgyr4"]
+[ext_resource type="Texture2D" uid="uid://cfng3buywm4wl" path="res://Assets/Blocksprites/Green/3x2.png" id="8_0kgqj"]
+[ext_resource type="Texture2D" uid="uid://df0juakr71xpb" path="res://Assets/Blocksprites/Orange/3x2.png" id="9_pt3wy"]
+[ext_resource type="Texture2D" uid="uid://dr42jeqnr2boh" path="res://Assets/Blocksprites/Yellow/2x3.png" id="10_d26vn"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_aoq4j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_qk34g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_bclpw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_d7upi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_0d73c")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_xgyr4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_0kgqj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_pt3wy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_d26vn")
+}],
+"loop": true,
+"name": &"rotated",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7irgw"]
+size = Vector2(510, 766)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mrksx"]
+size = Vector2(483, 738)
+
+[node name="BlockParent" instance=ExtResource("1_si717")]
+visible = true
+script = ExtResource("2_aa0xj")
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_aoq4j")
+animation = &"default"
+
+[node name="Grab Range" parent="." index="1"]
+visible = true
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_7irgw")
+
+[node name="Area2D" parent="." index="2"]
+visible = true
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+visible = true
+shape = SubResource("RectangleShape2D_mrksx")

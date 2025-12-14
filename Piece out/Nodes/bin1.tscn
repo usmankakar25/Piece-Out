@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://ekcdyql4ayky"]
+
+[ext_resource type="PackedScene" uid="uid://c2qq48q3kyar6" path="res://Nodes/bin.tscn" id="1_gs55u"]
+[ext_resource type="Script" path="res://Nodes/bin_1.gd" id="2_0gjn8"]
+
+[node name="Bin" instance=ExtResource("1_gs55u")]
+script = ExtResource("2_0gjn8")
