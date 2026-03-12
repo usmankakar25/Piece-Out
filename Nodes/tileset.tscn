@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://nmrajbtdtbl2"]
+
+[ext_resource type="Script" uid="uid://c6ny62pmjqp2y" path="res://Nodes/tileset.gd" id="1_jiy51"]
+
+[node name="NewTileset" type="Node2D" unique_id=2014823966]
+scale = Vector2(3, 3)
+script = ExtResource("1_jiy51")
+tileWidth = 5
+tileHeight = 7
+
+[node name="Tiles" type="Node2D" parent="." unique_id=1877698604]
+
+[node name="Port" type="Node2D" parent="." unique_id=278400426]

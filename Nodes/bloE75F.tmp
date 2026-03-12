@@ -1,0 +1,109 @@
+[gd_scene load_steps=9 format=3 uid="uid://bnxcs1hggxryj"]
+
+[ext_resource type="Script" path="res://2d_block.gd" id="1_rrfjb"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5j2nm"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"rotated",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aqsmw"]
+size = Vector2(255, 765)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8g2fj"]
+size = Vector2(229, 741.5)
+
+[sub_resource type="Animation" id="Animation_7od50"]
+resource_name = "set rotation"
+length = 0.001
+step = 0.0001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+
+[sub_resource type="Animation" id="Animation_8ymyx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_21aoo"]
+resource_name = "reset_rotation"
+length = 0.001
+step = 0.0001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vpoae"]
+_data = {
+"RESET": SubResource("Animation_8ymyx"),
+"reset_rotation": SubResource("Animation_21aoo"),
+"set rotation": SubResource("Animation_7od50")
+}
+
+[node name="BlockParent" type="CharacterBody2D"]
+visible = false
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_rrfjb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_5j2nm")
+animation = &"rotated"
+
+[node name="Grab Range" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_aqsmw")
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+collision_layer = 16
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+shape = SubResource("RectangleShape2D_8g2fj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vpoae")
+}
+
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]
+[connection signal="body_shape_exited" from="Area2D" to="." method="_on_area_2d_body_shape_exited"]

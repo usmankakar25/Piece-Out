@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cu0sxplkuadbb"]
+
+[ext_resource type="Script" uid="uid://chxpoa4a2m78h" path="res://Nodes/scoreController.gd" id="1_4otsf"]
+
+[node name="Score controller" type="Node2D" unique_id=1496209732]
+script = ExtResource("1_4otsf")
+
+[node name="Labels" type="Node2D" parent="." unique_id=398724946]

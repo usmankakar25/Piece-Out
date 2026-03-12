@@ -1,0 +1,202 @@
+[gd_scene format=3 uid="uid://dl6jaejxwmfne"]
+
+[ext_resource type="FontFile" uid="uid://di5j0i27x5bdj" path="res://Assets/Mario-Party-Hudson-Font.ttf" id="1_s5rhg"]
+[ext_resource type="Script" uid="uid://bq5gdsdlt6rav" path="res://Nodes/scoreText.gd" id="2_i6th5"]
+[ext_resource type="AudioStream" uid="uid://bdnmkk6ldpg3v" path="res://Assets/Music and sound effects/SE_BTL_EXCELENT.wav" id="3_ioeq7"]
+[ext_resource type="AudioStream" uid="uid://bby36vi4723rv" path="res://Assets/Music and sound effects/SE_BTL_GOOD.wav" id="4_ikvky"]
+
+[sub_resource type="Theme" id="Theme_0kbta"]
+default_font = ExtResource("1_s5rhg")
+
+[sub_resource type="Animation" id="Animation_3mgm8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_j8pa4"]
+resource_name = "continue"
+step = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"playtextBlue"
+}, {
+"args": [],
+"method": &"playtextYellow"
+}, {
+"args": [],
+"method": &"playtextGreen"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_panqh"]
+resource_name = "show"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_vm1f5"]
+resource_name = "show the blue"
+length = 0.8
+step = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"playtextBlue"
+}, {
+"args": [],
+"method": &"playtextYellow"
+}, {
+"args": [],
+"method": &"playtextGreen"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_1dxc5"]
+resource_name = "show the green"
+length = 0.001
+step = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"playtextGreen"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_k7fcl"]
+resource_name = "show the text"
+length = 1.6
+step = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.7, 1, 1.3, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"playtextOrange"
+}, {
+"args": [],
+"method": &"playtextBlue"
+}, {
+"args": [],
+"method": &"playtextYellow"
+}, {
+"args": [],
+"method": &"playtextGreen"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_p6ng0"]
+resource_name = "show the yellow"
+length = 0.4
+step = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"playtextYellow"
+}, {
+"args": [],
+"method": &"playtextGreen"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1vrqg"]
+_data = {
+&"RESET": SubResource("Animation_3mgm8"),
+&"continue": SubResource("Animation_j8pa4"),
+&"show": SubResource("Animation_panqh"),
+&"show the blue": SubResource("Animation_vm1f5"),
+&"show the green": SubResource("Animation_1dxc5"),
+&"show the text": SubResource("Animation_k7fcl"),
+&"show the yellow": SubResource("Animation_p6ng0")
+}
+
+[node name="Label" type="Label" unique_id=968081729]
+offset_right = 40.0
+offset_bottom = 23.0
+theme = SubResource("Theme_0kbta")
+theme_override_colors/font_color = Color(0, 0.905882, 1, 1)
+theme_override_font_sizes/font_size = 84
+text = "Art"
+script = ExtResource("2_i6th5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1570765267]
+libraries/ = SubResource("AnimationLibrary_1vrqg")
+
+[node name="Bigsound" type="AudioStreamPlayer2D" parent="." unique_id=3395115]
+stream = ExtResource("3_ioeq7")
+
+[node name="Smallsound" type="AudioStreamPlayer2D" parent="." unique_id=1929761458]
+stream = ExtResource("4_ikvky")
