@@ -17,6 +17,9 @@ func _ready():
 	self.position = Vector2(560,36)
 	sprite.frame = 0
 	
+func start():
+	run = true
+	
 func _process(_delta):
 	if run == true:
 		if timer.is_stopped():
@@ -27,7 +30,7 @@ func _process(_delta):
 			label.text = str(time)
 			timer.start()
 		
-		if time == 0:
+		if time <= 0:
 			finish.emit()
 			run = false
 		

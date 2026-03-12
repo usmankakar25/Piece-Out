@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://c5dobq6j8dhmv"]
+
+[ext_resource type="PackedScene" uid="uid://w8got3yx5dij" path="res://Nodes/editedOriginalCode/scorecard.tscn" id="1_vwmo8"]
+
+[node name="Team" unique_id=1509789609 instance=ExtResource("1_vwmo8")]

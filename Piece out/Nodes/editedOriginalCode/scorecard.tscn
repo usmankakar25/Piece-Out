@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://w8got3yx5dij"]
+
+[ext_resource type="Script" uid="uid://dp3bg5ngmrtay" path="res://Nodes/editedOriginalCode/scorecard.gd" id="1_nunoi"]
+[ext_resource type="Texture2D" uid="uid://ddp80rc2x57n8" path="res://Assets/scorecard.png" id="2_j5dju"]
+[ext_resource type="Texture2D" uid="uid://dn0lrsmy8s4xf" path="res://Assets/chrportrait-sheet0.png" id="3_vwxlm"]
+[ext_resource type="FontFile" uid="uid://di5j0i27x5bdj" path="res://Assets/Mario-Party-Hudson-Font.ttf" id="4_g52ia"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ktj2o"]
+atlas = ExtResource("3_vwxlm")
+region = Rect2(408, 0, 102, 102)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lrxap"]
+atlas = ExtResource("3_vwxlm")
+region = Rect2(0, 102, 102, 102)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vf044"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ktj2o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lrxap")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Theme" id="Theme_18gfp"]
+default_font = ExtResource("4_g52ia")
+default_font_size = 66
+
+[node name="Score Card" type="Node2D" unique_id=1509789609]
+script = ExtResource("1_nunoi")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1143141287]
+position = Vector2(18, -8)
+scale = Vector2(1.05, 1)
+texture = ExtResource("2_j5dju")
+
+[node name="Character image" type="AnimatedSprite2D" parent="Sprite2D" unique_id=1178792410]
+position = Vector2(-108.36364, -20)
+scale = Vector2(0.95, 1)
+sprite_frames = SubResource("SpriteFrames_vf044")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1148985547]
+offset_left = -48.0
+offset_top = -40.0
+offset_right = 150.0
+offset_bottom = 24.0
+
+[node name="Label" type="Label" parent="CenterContainer" unique_id=980418353]
+layout_mode = 2
+theme = SubResource("Theme_18gfp")
+theme_override_colors/font_shadow_color = Color(0.122252, 0.122252, 0.122252, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 66
+horizontal_alignment = 1

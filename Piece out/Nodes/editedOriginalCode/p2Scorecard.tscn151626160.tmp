@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://ckq67wuscshkx"]
+
+[ext_resource type="PackedScene" uid="uid://w8got3yx5dij" path="res://Nodes/editedOriginalCode/scorecard.tscn" id="1_1u5rl"]
+[ext_resource type="Texture2D" uid="uid://dhq8y3na4o2vl" path="res://Assets/scorecard2.png" id="2_e8nk0"]
+
+[node name="Team" unique_id=1509789609 instance=ExtResource("1_1u5rl")]
+alias = 1
+
+[node name="Sprite2D" parent="." index="0" unique_id=1143141287]
+texture = ExtResource("2_e8nk0")

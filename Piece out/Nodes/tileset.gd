@@ -1,77 +1,42 @@
-extends TileMapLayer
-class_name themap
+extends Node2D
+class_name TileSetParent
 
 signal full()
+signal updateBlocks(body)
 
-@onready var port = $Port
+@onready var tiles = $Tiles
+var tile_scene: PackedScene = preload("res://Nodes/tile.tscn")
 
-var indicator: PackedScene = preload("res://Nodes//indicator.tscn")
+@export var tileWidth: int
+@export var tileHeight: int
 
-var array = []
-var blocks = 0
-var id
+var tiles_dict: Dictionary = {}
+var totalTiles := 0
+var filledTiles := 0
 
 func _ready():
-	self.scale = Vector2(3,3)
-	port.frame = int(id) - 1
-	port._playanimation()
-	var miniarray
-	for i in range(0,5):
-		for j in range(0,7):
-			miniarray = []
-			miniarray.append(Vector2i(i,j))
-			miniarray.append(false)
-			array.append(miniarray)
-			
-func _setport():
-	port.position = self.position + Vector2(40.25, 56)
-			
-func _process(delta):
-	if blocks >= 35:
+	setupTiles()
+	totalTiles = tileWidth * tileHeight
+
+func setupTiles():
+	var bright = true
+	for y in range(tileHeight):
+		for x in range(tileWidth):
+			var newTile := tile_scene.instantiate() as Area2D
+			tiles.add_child(newTile)
+			var coord := Vector2i(x, y)
+			newTile.initalise(bright, coord)
+			newTile.fillTile.connect(tileHasChanged)
+			tiles_dict[coord] = newTile
+			bright = not bright
+
+func tileHasChanged(body):
+	filledTiles += 1
+	updateBlocks.emit(body)
+	if filledTiles >= totalTiles:
 		full.emit()
-		
-func createindicator(cord):
-	var ind = indicator.instantiate() as Node2D
-	$Indicator.add_child(ind)
-	ind._setposition(cordToPosition(cord))
-	
-func removeindicator(cord):
-	for ind in $Indicator.get_children():
-		if ind._getposition() == cordToPosition(cord):
-			ind.queue_free()
 
-func _settotrue(vector):
-	for value in array:
-		if value[0] == vector:
-			removeindicator(vector)
-			value[1] = true
-			_count()
-			return
-			
-func cordToPosition(cord):
-	var pos: Vector2
-	pos.x = 8 + (16 * cord.x)
-	pos.y = 8 + (16 * cord.y)
-	return pos
-
-func _count():
-	var count = 0
-	for arr in array:
-		if arr[1] == true:
-			count += 1
-	blocks = count
-
-func _getbool(vector):
-	for arr in array:
-		if arr[0] == vector:
-			return arr[1]
-		
-func _settofalse():
-	for arr in array:
-		arr[1] = false
-	blocks = 0
-
-func get_tile():
-	var cord = self.local_to_map(position)
-	return cord
-	
+func resetTiles():
+	filledTiles = 0
+	for tile in tiles.get_children():
+		tile.unfill()

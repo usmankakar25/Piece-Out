@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://cof4p3ofhs6ve"]
+
+[ext_resource type="PackedScene" uid="uid://bnxcs1hggxryj" path="res://Nodes/blockParent.tscn" id="1_nyr8o"]
+[ext_resource type="Script" uid="uid://ccsxlk4qfl3oo" path="res://Nodes/squareBlock.gd" id="2_s5kkh"]
+[ext_resource type="Texture2D" uid="uid://bpq0q26a4e3w4" path="res://Assets/Blocksprites/Orange/Square.png" id="3_d2kax"]
+[ext_resource type="Texture2D" uid="uid://hxb2dw4jasps" path="res://Assets/Blocksprites/Blue/Square.png" id="4_gxkp2"]
+[ext_resource type="Texture2D" uid="uid://bpa304mkc6bo0" path="res://Assets/Blocksprites/Yellow/Square.png" id="5_2of6b"]
+[ext_resource type="Texture2D" uid="uid://biitrhuax7gwr" path="res://Assets/Blocksprites/Green/Square.png" id="6_nawxv"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uysck"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_d2kax")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_gxkp2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_2of6b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_nawxv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8qv26"]
+size = Vector2(510.998, 511.002)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e52id"]
+size = Vector2(483.998, 481.002)
+
+[node name="BlockParent" unique_id=1448228471 groups=["Block"] instance=ExtResource("1_nyr8o")]
+script = ExtResource("2_s5kkh")
+id = 4
+
+[node name="AnimatedSprite2D" parent="." index="0" unique_id=235827670]
+sprite_frames = SubResource("SpriteFrames_uysck")
+
+[node name="Grab Range" parent="." index="1" unique_id=984133203]
+position = Vector2(-1.50002, -0.499995)
+shape = SubResource("RectangleShape2D_8qv26")
+
+[node name="CollisionShape2D" parent="Area2D" parent_id_path=PackedInt32Array(277610675) index="0" unique_id=598425848]
+shape = SubResource("RectangleShape2D_e52id")
