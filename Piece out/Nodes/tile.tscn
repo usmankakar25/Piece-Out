@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://eiql0x8syyr6"]
+
+[ext_resource type="Script" uid="uid://b8dowlp4q8nre" path="res://Nodes/tile.gd" id="1_5tf66"]
+[ext_resource type="Texture2D" uid="uid://ba6cv2ylcq1ck" path="res://DS DSi - Mario Party DS - Piece Out2.png" id="1_w6das"]
+[ext_resource type="PackedScene" uid="uid://dwyb0c8q431os" path="res://Nodes/indicator.tscn" id="3_lpstr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5tf66"]
+atlas = ExtResource("1_w6das")
+region = Rect2(329, 474, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lpstr"]
+atlas = ExtResource("1_w6das")
+region = Rect2(345, 474, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rm3n4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5tf66")
+}],
+"loop": true,
+"name": &"Tile1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lpstr")
+}],
+"loop": true,
+"name": &"Tile2",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bm764"]
+size = Vector2(2, 2)
+
+[node name="Area2D" type="Area2D" unique_id=303763832]
+collision_mask = 30
+script = ExtResource("1_5tf66")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1645075003]
+sprite_frames = SubResource("SpriteFrames_rm3n4")
+animation = &"Tile1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1450976074]
+scale = Vector2(0.079, 0.079)
+shape = SubResource("RectangleShape2D_bm764")
+
+[node name="Indicator" parent="." unique_id=1906139963 instance=ExtResource("3_lpstr")]
+scale = Vector2(0.5, 0.5)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

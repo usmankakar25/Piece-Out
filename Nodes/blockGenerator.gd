@@ -28,7 +28,6 @@ var singlePool = [
 
 enum Column {LEFT = 0, MIDDLE = 1, RIGHT = 2}
 
-var go = false
 var active = false
 
 func _ready():
@@ -62,7 +61,6 @@ func spawnBlocks(scene, count):
 	return result
 
 func createBlock():
-	go = true
 	var isDouble := randi() % 11 >= 8
 	var pool = doublePool if isDouble else singlePool
 	var scene = pickBlockScene(pool)
@@ -72,7 +70,6 @@ func createBlock():
 		blocks.add_child(blo)
 		setBlockPosition(blok, blo, i)
 		cooldown.wait_time = blo.gettime()
-	go = false
 	cooldown.start()
 	
 func setBlockPosition(blok, blo, point):
@@ -85,7 +82,7 @@ func setBlockPosition(blok, blo, point):
 		blo.setSpawnPosition(Column.RIGHT)
 	
 func isReady():
-	return (go == false and cooldown.is_stopped())
+	return (cooldown.is_stopped())
 	
 func _process(_delta):
 	if isReady() and active:

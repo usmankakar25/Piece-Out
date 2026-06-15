@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 # Godot 4+ specific ignores
+=======
+>>>>>>> 703341a2b2f3d28865ab405b310d0727e59183f3
 .import/
 .godot/
 export.cfg

@@ -20,22 +20,22 @@ func _ready():
 	connectSignals()
 	
 func configureChildren():
-	var configure = PieceOutGlobals.PlayerConfigs[player]
-	var card = configure["scorecard"].instantiate()
-	hand_instance = configure["hand"].instantiate()
+	var config = PieceOutGlobals.configs[player]
+	var card = config.scorecardScene.instantiate()
+	hand_instance = config.handScene.instantiate()
 	scorecardParent.add_child(card)
 	scorecard = scorecardParent.get_child(0)
 	hand_container.add_child(hand_instance)
-	setPositions(configure)
+	setPositions(config)
 	
 func getAlias():
 	var character = scorecard.getCharacter()
 	return PieceOutGlobals.charToString(character)
 	
-func setPositions(configure):
-	scorecard.global_position = configure["scorecard_position"]
-	tileset.global_position = configure["tileset_position"]
-	bin.global_position = configure["bin_position"]
+func setPositions(config):
+	scorecard.global_position = config.scorecardPosition 
+	tileset.global_position = config.tilesetPosition
+	bin.global_position = config.binPosition
 	
 func connectSignals():
 	tileset.full.connect(tilesetFull)
