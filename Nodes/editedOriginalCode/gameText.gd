@@ -7,9 +7,20 @@ func _ready():
 	
 func setStart():
 	gameText.text = "Start"
+	transition()
+	
+func transition():
+	var tween = create_tween()
+	tween.tween_method(set_font_size, 140, 96, 0.35)\
+	.set_trans(Tween.TRANS_EXPO)\
+	.set_ease(Tween.EASE_OUT)
+
+func set_font_size(size: int):
+	gameText.add_theme_font_size_override("font_size", size)
 	
 func setFinish():
 	gameText.text = "Finish"
+	transition()
 	
 func clear():
 	gameText.text = ""
