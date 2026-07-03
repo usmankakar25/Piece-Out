@@ -9,6 +9,7 @@ class_name Block
 
 signal hasTrashed()
 signal hasPlaced()
+signal hasFinished(block)
 enum BlockState {MOVING, GRABBED, PLACED, TRASHED, FROZEN}
 
 @export var id: PieceOutGlobals.BlockType
@@ -21,7 +22,7 @@ var placement
 var cordarray = []
 var requirementcounter
 var colour
-var square
+var square: bool = false
 var blockSize
 var tiles := []
 var rotationStep := 0
@@ -85,13 +86,24 @@ func setSpawnPosition(column: int):
 	position = Vector2(x, y)
 		
 func setgrab():
-	self.z_index = 2
+	self.z_index = 1001
 	state = BlockState.GRABBED
 	
 func movedown(delta):
 	position.y += downed * delta
 	if position.y >= 1000:
-		queue_free()
+		hasFinished.emit(self)
+		
+func animationFinished():
+	hasFinished.emit(self)
+		
+func resetBlock():
+	death.stop()
+	resetRotation()
+	self_modulate = Color(1, 1, 1, 1)
+	velocity = Vector2.ZERO
+	state = BlockState.MOVING
+	z_index = max(0, z_index + 1)
 		
 func registerHoveredTile(tile):
 	if not tiles.has(tile) and tile.getValid():
@@ -117,6 +129,11 @@ func rotateRight():
 		sound.play()
 		perform_rotation(1)
 		
+func resetRotation():
+	self.rotation_degrees = 0
+	sprite_2d.rotation_degrees = 0
+	sprite_2d.animation = "default"
+		
 func perform_rotation(step: int):
 	var tempFrame = sprite_2d.frame
 	rotationStep = (rotationStep + step) % 4
@@ -137,6 +154,7 @@ func handleTilePlacement():
 		for tile in tiles:
 			tile.fill(self)
 		state = BlockState.PLACED
+		z_index = -100
 		tiles.clear()
 		hasPlaced.emit()
 		

@@ -21,7 +21,7 @@ var placement
 var cordarray = []
 var requirementcounter
 var colour
-var square
+var square: bool = false
 var blockSize
 var tiles := []
 var rotationStep := 0

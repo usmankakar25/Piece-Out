@@ -20,7 +20,7 @@ var down
 var rotatel
 var rotater
 var grab
-
+var holding
 var grabTime
 
 var controller: Controller
@@ -33,7 +33,6 @@ var controller: Controller
 
 func _ready():
 	StateController.gameStateChanged.connect(gameStateChanged)
-	StateController.enterGameState(StateController.GameState.SETUP)
 		
 func gameStateChanged(_oldState, newState):
 	match newState:
@@ -63,6 +62,7 @@ func updateSprite():
 	sprite_2d.frame = not isIdle()
 
 func handleGrab():
+	holding = true
 	if not isGrabbing and currentbody:
 		grabbing()
 		return
@@ -70,6 +70,9 @@ func handleGrab():
 	if currentBlock:
 		currentbody = null
 		currentBlock.handlePlacement()
+		
+func release():
+	holding = false
 		
 func grabbing():
 	grabTime = Time.get_ticks_msec()
@@ -90,7 +93,7 @@ func rotateRight():
 		currentBlock.rotateRight()
 
 func isIdle():
-	return not Input.is_action_pressed(grab) and not isGrabbing
+	return not holding and not isGrabbing
 						
 func blockPlaced():
 	var holdTime = Time.get_ticks_msec() - grabTime

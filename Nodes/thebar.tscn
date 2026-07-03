@@ -53,7 +53,7 @@ texture = ExtResource("1_vtgro")
 
 [node name="Tunnel" type="Sprite2D" parent="." unique_id=65804967]
 visibility_layer = 16
-z_index = 1
+z_index = 1000
 z_as_relative = false
 position = Vector2(1, 0)
 texture = ExtResource("2_jls8s")

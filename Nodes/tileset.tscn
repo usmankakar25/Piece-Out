@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://c6ny62pmjqp2y" path="res://Nodes/tileset.gd" id="1_jiy51"]
 
 [node name="NewTileset" type="Node2D" unique_id=2014823966]
+z_index = -3000
 scale = Vector2(3, 3)
 script = ExtResource("1_jiy51")
 tileWidth = 5

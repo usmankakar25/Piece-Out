@@ -1,23 +1,27 @@
-extends Controller
 class_name HumanController
+extends Controller
 
-var left
-var right
-var up
-var down
-var grab
-var rotatel
-var rotater
+var button_map: Dictionary = {}
+var keybinds: Dictionary
+
+func _init(k: Dictionary) -> void:
+	keybinds = k
+
+func setup(hand: HandParent) -> void:
+	button_map[keybinds["grab"]] = func(): hand.handleGrab()
+	button_map[keybinds["rotatel"]] = func(): hand.rotateLeft()
+	button_map[keybinds["rotater"]] = func(): hand.rotateRight()
 
 func update(hand: HandParent, delta: float) -> void:
-	var direction = Input.get_vector(hand.left, hand.right, hand.up, hand.down)
+	if button_map.is_empty():
+		setup(hand)
+
+	var direction = Input.get_vector(keybinds["left"], keybinds["right"], keybinds["up"], keybinds["down"])
 	hand.move(direction, delta)
 
-	if Input.is_action_just_pressed(hand.grab):
-		hand.handleGrab()
+	for action in button_map:
+		if Input.is_action_just_pressed(action):
+			button_map[action].call()
 
-	if Input.is_action_just_pressed(hand.rotatel):
-		hand.rotateLeft()
-
-	if Input.is_action_just_pressed(hand.rotater):
-		hand.rotateRight()
+	if Input.is_action_just_released(keybinds["grab"]):
+		hand.release()

@@ -130,6 +130,7 @@ z_index = -1
 
 [node name="Sprite2D" type="Sprite2D" parent="Node2D" unique_id=1563031953]
 self_modulate = Color(1, 1, 1, 0.356863)
+z_index = -4096
 position = Vector2(577, 323)
 scale = Vector2(1.38221, 1.41667)
 texture = ExtResource("13_ec0xj")

@@ -4,13 +4,13 @@ class_name Bin
 @onready var player = $AnimationPlayer
 @onready var sound = $AudioStreamPlayer2D
 
-var id = ""
+var id
 var cooldown = false
 
 func _ready():
-	if id == "1":
+	if id == PieceOutGlobals.Player.ONE:
 		self.position = Vector2(291,540)
-	if id == "2":
+	if id == PieceOutGlobals.Player.TWO:
 		self.position = Vector2(830,540)
 	self.scale = Vector2(3,3)
 

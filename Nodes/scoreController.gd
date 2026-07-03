@@ -24,7 +24,7 @@ func findMost():
 		if list[colour] > most:
 			mostColour = [colour]
 			most = list[colour]
-		if list[colour] == most:
+		elif list[colour] == most:
 			mostColour.append(colour)
 		
 	

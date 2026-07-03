@@ -7,7 +7,7 @@ signal finish()
 @onready var timer = $Timer
 @onready var sound = $AudioStreamPlayer2D
 
-var time = 10
+var time = 60
 var run
 
 func _ready():

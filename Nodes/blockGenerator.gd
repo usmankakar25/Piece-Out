@@ -10,6 +10,8 @@ var square_scene: PackedScene = preload("res://Nodes//squareBlock.tscn")
 @onready var cooldown = $Timer
 @onready var blocks = $Blocks
 
+var blockpool: Array = []
+
 var doublePool = [
 	{ "scene": four_scene, "weight": 1 },
 	{ "scene": three_scene, "weight": 3 },
@@ -53,21 +55,35 @@ func pickBlockScene(availableScenes):
 		if roll < scene.weight:
 			return scene.scene
 		roll -= scene.weight
-		
-func spawnBlocks(scene, count):
-	var result := []
-	for i in count:
-		result.append(scene.instantiate() as CharacterBody2D)
-	return result
-
+	
+func getFromPool(scene: PackedScene) -> Node:
+	for node in blockpool:
+		if not node.visible and node.get_meta("source_scene") == scene:
+			node.visible = true
+			return node
+	var instance = scene.instantiate()
+	instance.hasFinished.connect(returnToPool)
+	instance.set_meta("source_scene", scene)
+	blocks.add_child(instance)
+	blockpool.append(instance)
+	return instance
+	
+func returnToPool(block: Node) -> void:
+	block.visible = false
+	block.position = Vector2(-9999, -9999)
+	
 func createBlock():
 	var isDouble := randi() % 11 >= 8
 	var pool = doublePool if isDouble else singlePool
 	var scene = pickBlockScene(pool)
-	var blok = spawnBlocks(scene, 2 if isDouble else 1)
+	var count = 2 if isDouble else 1
+	var blok = []
+	for i in count:
+		blok.append(getFromPool(scene))
 	for i in blok.size():
 		var blo = blok[i]
-		blocks.add_child(blo)
+		blo.resetBlock()
+		blo.visible = true
 		setBlockPosition(blok, blo, i)
 		cooldown.wait_time = blo.gettime()
 	cooldown.start()

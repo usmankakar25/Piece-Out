@@ -23,6 +23,7 @@ func configureChildren():
 	var config = PieceOutGlobals.configs[player]
 	var card = config.scorecardScene.instantiate()
 	hand_instance = config.handScene.instantiate()
+	hand_instance.controller = HumanController.new(config.keybinds)
 	scorecardParent.add_child(card)
 	scorecard = scorecardParent.get_child(0)
 	hand_container.add_child(hand_instance)
@@ -46,7 +47,7 @@ func connectSignals():
 func tilesetFull():
 	tileset.resetTiles()
 	list = gatherList()
-	loopThroughList()
+	await loopThroughList()
 	
 func gatherList():
 	blocks.buildDictionary()

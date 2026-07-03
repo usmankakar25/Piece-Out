@@ -34,7 +34,7 @@ func removeindicator():
 	Indicator.hide()
 	
 func _on_body_entered(body):
-	if filled or not body.is_in_group("Block") or !body.state == body.BlockState.GRABBED:
+	if filled or not body.is_in_group("Block") or (body.state != body.BlockState.GRABBED):
 		return
 	body.registerHoveredTile(self as Area2D)
 	createindicator()

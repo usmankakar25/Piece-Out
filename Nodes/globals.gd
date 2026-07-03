@@ -7,8 +7,8 @@ enum Chars {KNIGHT = 0, GOLF = 1}
 enum BlockType {SINGLE, DOUBLE, TRIPLE, QUAD, SQUARE, SIX}
 	
 static var configs = {
-	Player.ONE: preload("uid://qn38cbsg71sh").new(),
-	Player.TWO: preload("uid://dqmj7lrsqkp7").new(),
+	Player.ONE: preload("res://Player1Config.gd").new(),
+	Player.TWO: preload("res://Player2Config.gd").new(),
 }
 
 static func charToString(charEnum):
