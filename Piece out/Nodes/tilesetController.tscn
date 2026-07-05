@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://b4mr61fnw8c2"]
-
-[ext_resource type="Script" uid="uid://da1w3elrwj6pa" path="res://Nodes/tilesetController.gd" id="1_asjpa"]
-
-[node name="TilesetController" type="Node2D" unique_id=216879451]
-script = ExtResource("1_asjpa")

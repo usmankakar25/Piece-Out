@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cpfklqs0qh5cj"]
+
+[ext_resource type="Script" uid="uid://dqmj7lrsqkp7" path="res://Nodes/Players/Player_2/Player2Config.gd" id="1_jksi1"]
+[ext_resource type="PackedScene" uid="uid://ckq67wuscshkx" path="res://Nodes/Score Cards/p2Scorecard.tscn" id="2_74ejl"]
+[ext_resource type="PackedScene" uid="uid://bfspnq1etlnme" path="res://Nodes/Players/Player_2/player2Hand.tscn" id="3_0tk5m"]
+
+[node name="Player2Config" type="Node2D" unique_id=1810840763]
+script = ExtResource("1_jksi1")
+scorecardPosition = Vector2(995, 75)
+tilesetPosition = Vector2(738, 150)
+binPosition = Vector2(830, 540)
+scorecardScene = ExtResource("2_74ejl")
+handScene = ExtResource("3_0tk5m")

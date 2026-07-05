@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://jjvvkhlgbsq5"]
-
-[ext_resource type="Script" uid="uid://h2qws4vctdh4" path="res://Nodes/editedOriginalCode/audioHandler.gd" id="1_flwhl"]
-
-[node name="GameAudio" type="Node2D" unique_id=1976776382]
-script = ExtResource("1_flwhl")

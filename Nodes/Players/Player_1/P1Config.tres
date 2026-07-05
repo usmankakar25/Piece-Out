@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Player1Config" format=3 uid="uid://dsgoxiyrpl624"]
+
+[ext_resource type="Script" uid="uid://qn38cbsg71sh" path="res://Nodes/Players/Player_1/Player1Config.gd" id="1_fm4cj"]
+[ext_resource type="PackedScene" uid="uid://ckdhknh7sbnda" path="res://Nodes/Players/Player_1/player1Hand.tscn" id="1_h5rra"]
+[ext_resource type="PackedScene" uid="uid://c5dobq6j8dhmv" path="res://Nodes/Score Cards/p1Scorecard.tscn" id="2_mtd0u"]
+
+[resource]
+script = ExtResource("1_fm4cj")
+scorecardPosition = Vector2(155, 75)
+tilesetPosition = Vector2(198, 150)
+binPosition = Vector2(291, 540)
+scorecardScene = ExtResource("2_mtd0u")
+handScene = ExtResource("1_h5rra")
+metadata/_custom_type_script = "uid://qn38cbsg71sh"

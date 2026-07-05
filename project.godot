@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Piece Out"
-run/main_scene="res://Nodes/mainGame.tscn"
+run/main_scene="uid://b8f1wjdj7pj74"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
